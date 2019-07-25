@@ -15,6 +15,9 @@
 	          - hello/hello-build    
   ```
 
+- Find the list of Supported images @ https://circleci.com/docs/2.0/docker-image-tags.json
+
+
 ---
 
 [config.yml]: https://circleci.com/docs/2.0/configuration-reference/
