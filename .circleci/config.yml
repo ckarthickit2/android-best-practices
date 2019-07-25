@@ -30,11 +30,11 @@ jobs:
           name: Do actual Build
           command:  ./gradlew assembleDebug
 
-workflows:
-  version: 2
-  test-and-build-wf:
-    jobs:
-      - do_linting_and_testing_job
-      - build_apk_job:
-          requires:
-            do_linting_and_testing_job
+#workflows:
+#  version: 2
+#  test-and-build-wf:
+#    jobs:
+#      - do_linting_and_testing_job
+#      - build_apk_job:
+#          requires:
+#            do_linting_and_testing_job
