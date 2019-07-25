@@ -4,20 +4,8 @@ version: 2.1
 #  hello: circleci/hello-build@0.0.7 # uses the circleci/buildpack-deps Docker image
 
 jobs:
-  # Pre Build Checks
-  do_linting_and_testing_job:
-    docker:
-      - image: circleci/android:api-28
-    steps:
-      - checkout
-      - run:
-          name: "Run Gradle Lint"
-          command: ./gradlew lintDebug
-      - run:
-          name: "Run Gradle Test"
-          command: ./gradlew test
   # Actual Building
-  build_apk_job:
+  build:
     docker:
       - image: circleci/android:api-28
     steps:
@@ -29,12 +17,28 @@ jobs:
       - run:
           name: Do actual Build
           command:  ./gradlew assembleDebug
-
-#workflows:
-#  version: 2
-#  test-and-build-wf:
-#    jobs:
-#      - do_linting_and_testing_job
-#      - build_apk_job:
-#          requires:
-#            do_linting_and_testing_job
+      - run: echo "The artifacts is at ./app/build/outputs/apk/debug"
+      - run: ls -l ./app/build/outputs/apk/debug/
+      - store_artifacts:
+          path: ./app/build/outputs/apk/debug
+          destination: app-debug.apk
+  # Pre Build Checks
+  test:
+    docker:
+      - image: circleci/android:api-28
+    steps:
+      - checkout
+      - run:
+          name: "Run Gradle Lint"
+          command: ./gradlew lintDebug
+      - run:
+          name: "Run Gradle Test"
+          command: ./gradlew test
+workflows:
+  version: 2
+  test-and-build:
+    jobs:
+      - test
+      - build
+          requires:
+            test
