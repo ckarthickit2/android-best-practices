@@ -1,35 +1,40 @@
-apply plugin: 'com.android.application'
-
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+
 
 android {
   compileSdkVersion 28
+
+
   defaultConfig {
-    applicationId "com.ckarthickit.mealdb"
     minSdkVersion 19
     targetSdkVersion 28
     versionCode 1
     versionName "1.0"
+
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
   }
+
   buildTypes {
     release {
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
     }
   }
+
 }
 
 dependencies {
   implementation fileTree(dir: 'libs', include: ['*.jar'])
+  implementation androidXArtifacts.ktxExtension
   implementation jetbrainsArtifacts.kotlinStdLibJvm
   implementation androidXArtifacts.appCompat
-  implementation androidXArtifacts.ktxExtension
-  implementation androidXArtifacts.constraintLayout
-  implementation androidXArtifacts.material
   testImplementation junitArtifacts.junit4
   androidTestImplementation androidXArtifacts.androidTest.runner
   androidTestImplementation androidXArtifacts.androidTest.espresso
+}
+repositories {
+  mavenCentral()
 }
