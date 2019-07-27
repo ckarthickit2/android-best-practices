@@ -1,0 +1,85 @@
+
+//"buildscipt" block is special and cannot have multiple definitions
+//https://discuss.gradle.org/t/factoring-out-common-buildscript-definition-in-multi-project-build/5634
+
+
+//buildscript {
+//  apply from: "$project.rootDir/dependencies.gradle"
+//  repositories {
+//    google()
+//    jcenter()
+//    mavenCentral()
+//    maven {
+//      url "https://plugins.gradle.org/m2/"
+//    }
+//  }
+//  dependencies {
+//    //classpath "org.jlleitschuh.gradle:ktlint-gradle:8.2.0"
+//    classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.0.0-RC16"
+//    classpath "com.diffplug.spotless:spotless-plugin-gradle:3.23.1"
+//  }
+//}
+
+allprojects {
+  repositories {
+    google()
+    mavenCentral()
+    jcenter()
+  }
+
+  apply plugin: 'io.gitlab.arturbosch.detekt'
+//apply plugin: 'org.jlleitschuh.gradle.ktlint'
+//  apply plugin: "org.jmailen.kotlinter"
+  apply plugin: "com.diffplug.gradle.spotless"
+
+
+  spotless {
+    //To disable adding spotless as dependency to "check" - task un-comment below code.
+    //enforceCheck false
+    java {
+      target '**/*.java'
+      //googleJavaFormat()
+      encoding 'Cp1252' // java will have Cp1252
+    }
+
+    kotlin {
+      target '**/*.kt'
+      // Optional user arguments can be set as such:
+      //TODO: For some reasons , ktline is not picking up editorconfig, figureout passing editorconfig File
+      ktlint('0.32.0').userData(['indent_size': "2", "continuation_indent_size": "4"])
+      trimTrailingWhitespace()
+      //replaceRegex 'Remove empty lines before end of block', '\\n[\\n]+(\\s*})(?=\\n)', '\n$1'
+      //replaceRegex 'Remove trailing empty comment lines.', '\n\\s*\\*(\n\\s*\\*/\n)', '$1'
+    }
+
+//    //https://github.com/diffplug/spotless/issues/206
+//    freshmark {
+//      target 'README.md', 'CONTRIBUTING.md'
+//      propertiesFile('gradle.properties')
+//    }
+
+    cpp {
+      target '**/*.cpp', '**/*.c'
+    }
+
+//	format 'misc', {
+//	target '**/*.gradle', '**/*.md', '**/.gitignore'
+//
+//	trimTrailingWhitespace()
+//	indentWithTabs() // or spaces. Takes an integer argument if you don't like 4
+//	endWithNewline()
+//	}
+  }
+
+  detekt {
+    config = files("$rootDir/team-props/detekt/default-detekt-config.yml")
+    filters = ".*build.*,.*/resources/.*,.*/tmp/.*"
+    //Optional baseline, uncomment & run gradle command detektBaseline to exclude existing issues
+    //baseline = file("detekt-baseline.xml")
+  }
+}
+
+
+//apply from: "$project.rootDir/team-props/ktlint.gradle"
+apply from: "$project.rootDir/team-props/git-hooks.gradle"
+

@@ -1,5 +1,14 @@
 //NOTE: TO BE APPLIED TO ROOT build.gradle
 
+afterEvaluate {
+  exec {
+    workingDir project.rootDir
+    commandLine "$project.rootDir/team-props/git-hooks/copyGitHooks.sh", "$project.rootDir"
+  }
+}
+return
+
+//Couldn't find a task to add dependency to on the root-project. So the below code is useless as of now.
 static def isLinuxOrMacOs() {
   def osName = System.getProperty('os.name').toLowerCase(Locale.ROOT)
   return osName.contains('linux') || osName.contains('mac os') || osName.contains('macos')
@@ -38,6 +47,3 @@ afterEvaluate {
   }
 }
 
-allprojects {
-  println("projectName = ${project.name}")
-}

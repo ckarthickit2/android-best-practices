@@ -21,3 +21,6 @@ vcs.xml
 
 #Local gitconfig
 .gitconfig
+
+#lint config
+lint.xml
