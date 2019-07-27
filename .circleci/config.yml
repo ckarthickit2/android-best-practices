@@ -29,10 +29,16 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "Run Gradle Lint"
+          name: "Run Spotless Check"
+          command: ./gradlew spotlessCheck
+      - run:
+          name: "Run Detekt"
+          command: ./gradlew detekt
+      - run:
+          name: "Run Lint"
           command: ./gradlew lintDebug
       - run:
-          name: "Run Gradle Test"
+          name: "Run Unit Test"
           command: ./gradlew test
 workflows:
   version: 2
