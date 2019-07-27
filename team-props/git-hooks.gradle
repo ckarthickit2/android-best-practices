@@ -1,32 +1,43 @@
+//NOTE: TO BE APPLIED TO ROOT build.gradle
+
 static def isLinuxOrMacOs() {
-    def osName = System.getProperty('os.name').toLowerCase(Locale.ROOT)
-    return osName.contains('linux') || osName.contains('mac os') || osName.contains('macos')
+  def osName = System.getProperty('os.name').toLowerCase(Locale.ROOT)
+  return osName.contains('linux') || osName.contains('mac os') || osName.contains('macos')
 }
 
 task copyGitHooks(type: Copy) {
-    description 'Copies the git hooks from team-props/git-hooks to the .git folder.'
-    from("${rootDir}/team-props/git-hooks/") {
-        include '**/*.sh'
-        rename '(.*).sh', '$1'
-    }
-    into "${rootDir}/.git/hooks"
-    onlyIf { isLinuxOrMacOs() }
+  description 'Copies the git hooks from team-props/git-hooks to the .git folder.'
+  from("${rootDir}/team-props/git-hooks/") {
+    include '**/*.sh'
+    rename '(.*).sh', '$1'
+  }
+  into "${rootDir}/.git/hooks"
+  onlyIf { isLinuxOrMacOs() }
 }
 
 task installGitHooks(type: Exec) {
-    description 'Installs the pre-commit git hooks from team-props/git-hooks.'
-    group 'git hooks'
-    workingDir rootDir
-    commandLine 'chmod'
-    args '-R', '+x', '.git/hooks/'
-    dependsOn copyGitHooks
-    onlyIf { isLinuxOrMacOs() }
-    doLast { logger.info('Git hook installed successfully.') }
+  description 'Installs the pre-commit git hooks from team-props/git-hooks.'
+  group 'git hooks'
+  workingDir rootDir
+  commandLine 'chmod'
+  args '-R', '+x', '.git/hooks/'
+  dependsOn copyGitHooks
+  onlyIf { isLinuxOrMacOs() }
+  doLast { logger.info('Git hook installed successfully.') }
 }
 
 afterEvaluate {
-    // We install the hook at the first occasion
-    tasks['clean'].dependsOn installGitHooks
-    //tasks['assemble'].dependsOn installGitHooks
+
+  if (!file(".git/hooks/pre-commit").exists() || !file(".git/hooks/pre-push").exists()) {
+    allprojects {
+      // We install the hook at the first occasion
+      //project.tasks.
+      //tasks['clean'].dependsOn installGitHooks
+      //tasks['assemble'].dependsOn installGitHooks
+    }
+  }
 }
 
+allprojects {
+  println("projectName = ${project.name}")
+}

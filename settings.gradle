@@ -1,1 +1,2 @@
-include ':app'
+rootProject.name = "android-best-practices"
+include ':app', ':mealdb'
