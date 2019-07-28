@@ -21,11 +21,7 @@ data class Ingredient(
   @Json(name = "strIngredient") val name: String,
   @Json(name = "strDescription") val description: String? = "",
   @Json(name = "strType") val type: String? = ""
-) : MealDbItem() {
-  init {
-      println("====created===$id")
-  }
-}
+) : MealDbItem()
 
 @JsonClass(generateAdapter = true)
 data class Meal(
