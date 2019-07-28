@@ -66,5 +66,6 @@ copy_hook_if_modified "$1/team-props/git-hooks/pre-commit.sh" "$1/.git/hooks/pre
 copy_hook_if_modified "$1/team-props/git-hooks/pre-push.sh" "$1/.git/hooks/pre-push" "pre-push"
 
 copy_hook_if_modified "$1/team-props/lint-ing/lint.xml" "$1/lint.xml" "lint.xml"
-#}
 
+copy_hook_if_modified "$1/team-props/.editorconfig" "$1/.editorconfig" ".editorconfig"
+#}
