@@ -24,6 +24,7 @@ android {
 
 dependencies {
   implementation fileTree(dir: 'libs', include: ['*.jar'])
+  implementation project(":mealdb")
   implementation jetbrainsArtifacts.kotlinStdLibJvm
   implementation androidXArtifacts.appCompat
   implementation androidXArtifacts.ktxExtension

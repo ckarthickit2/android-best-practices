@@ -1,2 +1,6 @@
-<manifest
-    package="com.ckarthickit.mealdb"/>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ckarthickit.mealdb.lib">
+  <uses-permission android:name="android.permission.INTERNET"/>
+  <application>
+  </application>
+</manifest>
