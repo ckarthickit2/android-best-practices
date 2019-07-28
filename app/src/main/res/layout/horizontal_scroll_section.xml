@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:context=".ui.MealCatalogActivity">
+
+  <androidx.appcompat.widget.AppCompatTextView
+      android:id="@+id/section_name"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="3dp"
+      android:textSize="18sp"
+      android:singleLine="true"
+      android:padding="6dp"
+      android:layout_centerHorizontal="true"
+      android:gravity="center"
+      android:ellipsize="marquee"
+      android:background="@android:color/black"
+      android:marqueeRepeatLimit="marquee_forever"
+      android:textColor="@android:color/white"
+      android:textStyle="bold"
+  />
+
+  <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/section_recycler"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_below="@id/section_name"
+      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+      tools:itemCount="10"/>
+</RelativeLayout>
