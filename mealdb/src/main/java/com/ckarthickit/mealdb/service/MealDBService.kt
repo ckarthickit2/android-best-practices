@@ -11,7 +11,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface MealDBService {
+internal interface MealDBService {
 
   companion object {
     const val base_path = "/api/json/v1/1"

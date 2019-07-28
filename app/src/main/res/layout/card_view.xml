@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="260dp">
+
+  <ImageView
+      android:id="@+id/card_image"
+      android:contentDescription="@string/recipie"
+      android:layout_width="260dp"
+      android:layout_height="260dp"
+      android:adjustViewBounds="true"
+      android:scaleType="centerCrop"/>
+
+  <View
+      android:layout_width="260dp"
+      android:layout_height="80dp"
+      android:layout_alignTop="@id/card_image"
+      android:background="@drawable/black_gradient_top_down"/>
+
+  <View
+      android:id="@+id/dull"
+      android:layout_width="260dp"
+      android:layout_height="130dp"
+      android:layout_alignBottom="@id/card_image"
+      android:background="@drawable/black_gradient_down_top"/>
+
+  <androidx.appcompat.widget.AppCompatTextView
+      android:id="@+id/card_label"
+      android:layout_width="260dp"
+      android:layout_height="wrap_content"
+      android:layout_above="@id/card_sub_label"
+      android:layout_marginStart="3dp"
+      android:layout_marginBottom="3dp"
+      android:ellipsize="end"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      android:textStyle="bold"/>
+
+  <androidx.appcompat.widget.AppCompatTextView
+      android:id="@+id/card_sub_label"
+      android:layout_width="260dp"
+      android:layout_height="wrap_content"
+      android:layout_alignBottom="@id/card_image"
+      android:layout_marginStart="3dp"
+      android:layout_marginBottom="5dp"
+      android:ellipsize="end"
+      android:textColor="@color/white"
+      android:textSize="14sp"/>
+
+</RelativeLayout>
