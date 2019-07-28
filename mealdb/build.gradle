@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-
+apply plugin: 'kotlin-kapt'
 
 android {
   compileSdkVersion 28
@@ -11,7 +11,7 @@ android {
     minSdkVersion 19
     targetSdkVersion 28
     versionCode 1
-    versionName "1.0"
+    versionName "1.0.0"
 
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -31,7 +31,16 @@ dependencies {
   implementation androidXArtifacts.ktxExtension
   implementation jetbrainsArtifacts.kotlinStdLibJvm
   implementation androidXArtifacts.appCompat
+  implementation "com.squareup.retrofit2:retrofit:2.6.0"
+  implementation "com.squareup.retrofit2:converter-moshi:2.6.0"
+  implementation "com.squareup.moshi:moshi:1.8.0"
+  kapt "com.squareup.moshi:moshi-kotlin-codegen:1.8.0"
+
+  testImplementation("org.junit.jupiter:junit-jupiter-api:5.5.1") //junit5
+  testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.5.1")
   testImplementation junitArtifacts.junit4
+  testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.5.1")
+  testImplementation("com.squareup.okhttp3:mockwebserver:3.12.0")
   androidTestImplementation androidXArtifacts.androidTest.runner
   androidTestImplementation androidXArtifacts.androidTest.espresso
 }
