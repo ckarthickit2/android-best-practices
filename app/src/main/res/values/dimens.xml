@@ -1,3 +1,12 @@
 <resources>
   <dimen name="fab_margin">16dp</dimen>
+  <dimen name="default_padding">8dp</dimen>
+  <dimen name="default_margin">8dp</dimen>
+  <dimen name="half_padding">4dp</dimen>
+  <dimen name="half_margin">4dp</dimen>
+  <dimen name="double_padding">16dp</dimen>
+  <dimen name="double_margin">16dp</dimen>
+  <dimen name="card_width">208dp</dimen>
+  <dimen name="card_height">208dp</dimen>
+  <dimen name="card_height_half">104dp</dimen>
 </resources>

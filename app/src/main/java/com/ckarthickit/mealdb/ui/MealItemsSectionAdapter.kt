@@ -29,7 +29,8 @@ class MealItemsSectionAdapter(val mealItems: Array<Meal>) : RecyclerView.Adapter
 
   override fun onBindViewHolder(holder: MealItemViewHolder, position: Int) {
     val mealItem = mealItems[position]
-    holder.label.text = mealItem.id.toString()
+    holder.label.text = mealItem.name
+    holder.subLabel.text = mealItem.id.toString()
     Glide
       .with(holder.itemView.context)
       .load(mealItem.thumbnail)

@@ -38,9 +38,14 @@ class MealCatalogAdapter(private val areas: Array<Area>, items: Map<Area, Array<
     val mealItems: Array<Meal>? = items[area]
     mealItems?.takeIf { items.isNotEmpty() }?.let {
       holder.sectionRecycler.run {
-        val mLayoutManager = LinearLayoutManager(holder.itemView.context, LinearLayoutManager.HORIZONTAL, false)
+        val context = holder.itemView.context
+        val mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         layoutManager = mLayoutManager
         isNestedScrollingEnabled = false
+        if (itemDecorationCount == 0) {
+          val itemPadding = context.resources.getDimensionPixelSize(R.dimen.default_padding)
+          addItemDecoration(RecyclerViewCellMaringDecoration(itemPadding))
+        }
         setHasFixedSize(true)
         adapter = MealItemsSectionAdapter(mealItems)
       }
