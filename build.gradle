@@ -18,9 +18,18 @@ buildscript {
     classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.0.0-RC16"
     classpath "com.diffplug.spotless:spotless-plugin-gradle:3.23.1"
 //    classpath "de.mannodermaus.gradle.plugins:android-junit5:1.5.0.0"
+    classpath "com.vanniktech:gradle-android-junit-jacoco-plugin:0.15.0"
   }
 }
 
+apply plugin: "com.vanniktech.android.junit.jacoco"
+junitJacoco {
+  jacocoVersion = '0.8.2' // type String
+  ignoreProjects = [] // type String array
+  excludes // type String List
+  includeNoLocationClasses = false // type boolean
+  includeInstrumentationCoverageInMergedReport = false // type boolean
+}
 //Note:
 //plugins {} DSL will work only if
 // the plugin is part of Gradle Core Plugins  (org.gradle namespace)
