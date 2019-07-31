@@ -21,7 +21,9 @@ jobs:
       - run: ls -l ./app/build/outputs/apk/debug/
       - store_artifacts:
           path: ./app/build/outputs/apk/debug
-          destination: app-debug.apk
+          destination: app-debug
+      - store_artifacts:
+          path: ./mealdb/build/outputs/aar
   # Pre Build Checks
   test:
     docker:
@@ -40,6 +42,11 @@ jobs:
       - run:
           name: "Run Unit Test"
           command: ./gradlew test
+      - run:
+          name: "Run Jacoco Test Report"
+          command: ./gradlew jacocoTestReportDebug
+      - store_artifacts:
+          path: ./mealdb/build/reports
 workflows:
   version: 2
   test-and-build:
