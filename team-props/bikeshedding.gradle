@@ -79,6 +79,11 @@ allprojects {
   }
 }
 
+subprojects {
+  project.plugins.withId('com.android.library') {
+  }
+}
+
 
 //apply from: "$project.rootDir/team-props/ktlint.gradle"
 apply from: "$project.rootDir/team-props/git-hooks.gradle"
