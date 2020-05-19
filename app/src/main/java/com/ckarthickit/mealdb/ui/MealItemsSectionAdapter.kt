@@ -8,6 +8,8 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import com.ckarthickit.mealdb.R
 import com.ckarthickit.mealdb.service.model.Meal
 
@@ -31,12 +33,15 @@ class MealItemsSectionAdapter(val mealItems: Array<Meal>) : RecyclerView.Adapter
     val mealItem = mealItems[position]
     holder.label.text = mealItem.name
     holder.subLabel.text = mealItem.id.toString()
+    val crossFadeFactory = DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()
     Glide
       .with(holder.itemView.context)
       .load(mealItem.thumbnail)
-      .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-      .placeholder(R.color.transparent)
-      .animate(R.anim.fade_in)
+      .diskCacheStrategy(DiskCacheStrategy.ALL)
+      .placeholder(R.drawable.black_gradient_top_down)
+      .error(R.drawable.black_gradient_top_down)
+      .transition(DrawableTransitionOptions.with(crossFadeFactory))
+//      .animate(R.anim.fade_in)
       .into(holder.imageView)
   }
 }

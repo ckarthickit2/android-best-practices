@@ -32,6 +32,11 @@ class MealCatalogAdapter(private val areas: Array<Area>, items: Map<Area, Array<
     return items.size
   }
 
+  fun updateItems(items: Map<Area, Array<Meal>>) {
+    this.items = items
+    notifyDataSetChanged()
+  }
+
   override fun onBindViewHolder(holder: MealCatalogViewHolder, position: Int) {
     val area = areas[position]
     holder.sectionLabel.text = area.name

@@ -9,8 +9,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.channels.consumeEach
-import kotlinx.coroutines.channels.produce
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -37,13 +37,13 @@ class MealCatalogViewModel : androidx.lifecycle.ViewModel() {
         _areasLiveData.value = areas
         // this@MealCatalogViewModel.areas = areas
       }
-      val mealListStream = produce {
+      val mealListStream = flow<Pair<Area, Array<Meal>>> {
         for (area in areas) {
-          send(area to mealService.mealsByArea(area))
+          emit(area to mealService.mealsByArea(area))
         }
       }
       withContext(Dispatchers.Main) {
-        mealListStream.consumeEach {
+        mealListStream.collect {
           val (area, mealList) = it
           _areaToRecipeMapLiveData.value = mutableMapOf(area to mealList).apply {
             _areaToRecipeMapLiveData.value?.let { map ->
