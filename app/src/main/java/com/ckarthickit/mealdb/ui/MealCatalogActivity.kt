@@ -29,7 +29,7 @@ class MealCatalogActivity : AppCompatActivity() {
       setupAdapter()
     })
     catalogViewModel.areaToRecipeMapLiveData.observe(this, Observer {
-      setupAdapter()
+      setupAdapter(true)
     })
   }
 
@@ -37,14 +37,24 @@ class MealCatalogActivity : AppCompatActivity() {
     catalogRecycler = findViewById(R.id.catalog_recycler)
   }
 
-  private fun setupAdapter() {
+  private fun setupAdapter(areasToRecepieChanged: Boolean = false) {
     catalogRecycler.run {
       val mLayoutManager = LinearLayoutManager(this@MealCatalogActivity)
       layoutManager = mLayoutManager
       isNestedScrollingEnabled = false
       setHasFixedSize(true)
       catalogViewModel.areasLiveData.value?.let {
-        adapter = MealCatalogAdapter(it, catalogViewModel.areaToRecipeMapLiveData.value ?: emptyMap())
+        if (areasToRecepieChanged) {
+          val items = catalogViewModel.areaToRecipeMapLiveData.value ?: emptyMap()
+          (this.adapter as? MealCatalogAdapter)?.updateItems(items)
+        } else {
+          swapAdapter(
+            MealCatalogAdapter(
+              it,
+              catalogViewModel.areaToRecipeMapLiveData.value ?: emptyMap()
+            ), false
+          )
+        }
       }
     }
   }

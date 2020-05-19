@@ -3,6 +3,11 @@
 ## Build Status
 
 [![Master CI](https://img.shields.io/circleci/build/github/ckarthickit2/android-best-practices/master)](https://circleci.com/gh/ckarthickit2/android-best-practices/tree/master)
+
+## Landing Page 
+
+![MealDB Landing Page][meal_db_catalog]
+
 ## Tools Used
 
 1. [Editor Config][editor_config] - Helps maintain __consistent codestyle__ for multiple developers
@@ -51,3 +56,4 @@ Occurs when a development team spends a disproportionate amount of time and effo
 [editor_config_xcode]: https://github.com/MarcoSero/EditorConfig-Xcode
 [shields_io]: https://shields.io/
 [git_hooks_gradle]: team-props/git-hooks.gradle
+[meal_db_catalog]: art/mealdb-catalog.png
