@@ -24,38 +24,22 @@ class MealCatalogActivity : AppCompatActivity() {
 
   private fun setupViewModel() {
     catalogViewModel = ViewModelProviders.of(this)[MealCatalogViewModel::class.java]
-
-    catalogViewModel.areasLiveData.observe(this, Observer {
-      setupAdapter()
-    })
     catalogViewModel.areaToRecipeMapLiveData.observe(this, Observer {
-      setupAdapter(true)
+      updateAdapter()
     })
   }
 
   private fun initViews() {
     catalogRecycler = findViewById(R.id.catalog_recycler)
+    val mLayoutManager = LinearLayoutManager(this@MealCatalogActivity)
+    catalogRecycler.layoutManager = mLayoutManager
+    catalogRecycler.isNestedScrollingEnabled = false
+    catalogRecycler.setHasFixedSize(true)
+    catalogRecycler.adapter = MealCatalogAdapter()
   }
 
-  private fun setupAdapter(areasToRecepieChanged: Boolean = false) {
-    catalogRecycler.run {
-      val mLayoutManager = LinearLayoutManager(this@MealCatalogActivity)
-      layoutManager = mLayoutManager
-      isNestedScrollingEnabled = false
-      setHasFixedSize(true)
-      catalogViewModel.areasLiveData.value?.let {
-        if (areasToRecepieChanged) {
-          val items = catalogViewModel.areaToRecipeMapLiveData.value ?: emptyMap()
-          (this.adapter as? MealCatalogAdapter)?.updateItems(items)
-        } else {
-          swapAdapter(
-            MealCatalogAdapter(
-              it,
-              catalogViewModel.areaToRecipeMapLiveData.value ?: emptyMap()
-            ), false
-          )
-        }
-      }
-    }
+  private fun updateAdapter() {
+    (catalogRecycler.adapter as MealCatalogAdapter)
+      .updateItems(catalogViewModel.areaToRecipeMapLiveData.value ?: emptyList())
   }
 }
