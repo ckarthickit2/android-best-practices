@@ -9,15 +9,30 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ckarthickit.mealdb.R
 import com.ckarthickit.mealdb.service.model.Area
 import com.ckarthickit.mealdb.service.model.Meal
+import kotlinx.android.synthetic.main.horizontal_scroll_section.view.*
 
 class MealCatalogViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-  internal val sectionRecycler: RecyclerView = itemView.findViewById(R.id.section_recycler)
-  internal val sectionLabel: AppCompatTextView = itemView.findViewById(R.id.section_name)
+  internal val sectionRecycler: RecyclerView = itemView.section_recycler
+  internal val sectionLabel: AppCompatTextView = itemView.section_name
+
+  init {
+    sectionRecycler.run {
+      val mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+      this.layoutManager = mLayoutManager
+      this.isNestedScrollingEnabled = false
+      this.setHasFixedSize(true)
+      if (itemDecorationCount == 0) {
+        val itemPadding = resources.getDimensionPixelSize(R.dimen.default_padding)
+        addItemDecoration(RecyclerViewCellMaringDecoration(itemPadding))
+      }
+      adapter = MealItemsSectionAdapter()
+    }
+  }
 }
 
-class MealCatalogAdapter(private val areas: Array<Area>, items: Map<Area, Array<Meal>>) :
-  RecyclerView.Adapter<MealCatalogViewHolder>() {
-  private var items: Map<Area, Array<Meal>> = items
+class MealCatalogAdapter : RecyclerView.Adapter<MealCatalogViewHolder>() {
+
+  private var areaToMeal: List<Pair<Area, List<Meal>>> = emptyList()
     set(value) {
       field = value
       notifyDataSetChanged()
@@ -29,31 +44,18 @@ class MealCatalogAdapter(private val areas: Array<Area>, items: Map<Area, Array<
   }
 
   override fun getItemCount(): Int {
-    return items.size
+    return areaToMeal.size
   }
 
-  fun updateItems(items: Map<Area, Array<Meal>>) {
-    this.items = items
-    notifyDataSetChanged()
+  fun updateItems(items: List<Pair<Area, List<Meal>>>) {
+    this.areaToMeal = items
   }
 
   override fun onBindViewHolder(holder: MealCatalogViewHolder, position: Int) {
-    val area = areas[position]
+    val (area, mealItems) = areaToMeal[position]
     holder.sectionLabel.text = area.name
-    val mealItems: Array<Meal>? = items[area]
-    mealItems?.takeIf { items.isNotEmpty() }?.let {
-      holder.sectionRecycler.run {
-        val context = holder.itemView.context
-        val mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        layoutManager = mLayoutManager
-        isNestedScrollingEnabled = false
-        if (itemDecorationCount == 0) {
-          val itemPadding = context.resources.getDimensionPixelSize(R.dimen.default_padding)
-          addItemDecoration(RecyclerViewCellMaringDecoration(itemPadding))
-        }
-        setHasFixedSize(true)
-        adapter = MealItemsSectionAdapter(mealItems)
-      }
+    if (mealItems.isNotEmpty()) {
+      (holder.sectionRecycler.adapter as MealItemsSectionAdapter).updateItems(mealItems)
     }
   }
 }

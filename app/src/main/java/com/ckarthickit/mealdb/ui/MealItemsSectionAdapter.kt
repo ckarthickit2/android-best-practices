@@ -19,7 +19,9 @@ class MealItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
   internal val subLabel: AppCompatTextView = view.findViewById(R.id.card_sub_label)
 }
 
-class MealItemsSectionAdapter(val mealItems: Array<Meal>) : RecyclerView.Adapter<MealItemViewHolder>() {
+class MealItemsSectionAdapter : RecyclerView.Adapter<MealItemViewHolder>() {
+  private var mealItems: List<Meal> = emptyList()
+
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealItemViewHolder {
     val view = LayoutInflater.from(parent.context).inflate(R.layout.card_view, parent, false)
     return MealItemViewHolder(view)
@@ -27,6 +29,11 @@ class MealItemsSectionAdapter(val mealItems: Array<Meal>) : RecyclerView.Adapter
 
   override fun getItemCount(): Int {
     return mealItems.size
+  }
+
+  fun updateItems(mealItems: List<Meal>) {
+    this.mealItems = mealItems
+    notifyDataSetChanged()
   }
 
   override fun onBindViewHolder(holder: MealItemViewHolder, position: Int) {
