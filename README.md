@@ -28,16 +28,16 @@ working on same project __across various editors and IDEs__
 
 ## Setting Up Tools
 
+### Unit Testing
+
+- [Mockk Library][mockk]
+- [Mocks aren't Stubs][mock_vs_stubs]
+
 ### Git-Hooks
 
 -  Currently Targeting only `MacOS` and `Linux` machines.
 -  [Git Hooks][git_hooks_gradle] script takes care of copying the git-hooks before clean/assemble.
 - Relies on the fact that developers will at-least `clean` or `assemble` once before committing any code.
-
-
-
-
-
 
 ---
 
@@ -57,3 +57,5 @@ Occurs when a development team spends a disproportionate amount of time and effo
 [shields_io]: https://shields.io/
 [git_hooks_gradle]: team-props/git-hooks.gradle
 [meal_db_catalog]: art/mealdb-catalog.png
+[mockk]: https://github.com/mockk/mockk
+[mock_vs_stubs]: https://martinfowler.com/articles/mocksArentStubs.html#TheDifferenceBetweenMocksAndStubs
