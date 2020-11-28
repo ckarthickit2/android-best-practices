@@ -6,7 +6,7 @@ import com.squareup.moshi.JsonClass
 internal sealed class MealDBResponse<T>(val items: Array<T>) {
   override fun equals(other: Any?): Boolean {
     if (this === other) return true
-    if (javaClass != other?.javaClass) return false
+    if (javaClass != other.javaClass) return false
 
     other as MealDBResponse<T>
 

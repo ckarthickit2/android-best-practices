@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.*
 
 class MealCatalogViewModel : androidx.lifecycle.ViewModel() {
 
@@ -51,5 +52,9 @@ class MealCatalogViewModel : androidx.lifecycle.ViewModel() {
   override fun onCleared() {
     // cancel all
     backgroundWorkScope.cancel()
+  }
+
+  fun emptyFun(){
+
   }
 }
