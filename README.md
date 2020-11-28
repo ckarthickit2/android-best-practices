@@ -25,6 +25,7 @@ working on same project __across various editors and IDEs__
 - Gradle Plugins for Static Analysis
 	- https://github.com/novoda/gradle-static-analysis-plugin
 4. [Shields IO][shields_io] - For README badges
+5. [Danger][danger_integration_guide]
 
 ## Setting Up Tools
 
@@ -59,3 +60,4 @@ Occurs when a development team spends a disproportionate amount of time and effo
 [meal_db_catalog]: art/mealdb-catalog.png
 [mockk]: https://github.com/mockk/mockk
 [mock_vs_stubs]: https://martinfowler.com/articles/mocksArentStubs.html#TheDifferenceBetweenMocksAndStubs
+[danger_integration_guide]: https://gist.github.com/ckarthickit/53156ed9080affe5cae31a5645d4fc11
