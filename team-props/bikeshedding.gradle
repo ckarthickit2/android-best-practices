@@ -35,7 +35,7 @@ allprojects {
 
   spotless {
     //To disable adding spotless as dependency to "check" - task un-comment below code.
-    //enforceCheck false
+    enforceCheck false
     java {
       target '**/*.java'
       //googleJavaFormat()

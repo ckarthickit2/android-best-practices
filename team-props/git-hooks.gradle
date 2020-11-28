@@ -1,11 +1,11 @@
 //NOTE: TO BE APPLIED TO ROOT build.gradle
 
-afterEvaluate {
-  exec {
-    workingDir project.rootDir
-    commandLine "$project.rootDir/team-props/git-hooks/copyGitHooks.sh", "$project.rootDir"
-  }
-}
+//afterEvaluate {
+//  exec {
+//    workingDir project.rootDir
+//    commandLine "$project.rootDir/team-props/git-hooks/copyGitHooks.sh", "$project.rootDir"
+//  }
+//}
 return
 
 //Couldn't find a task to add dependency to on the root-project. So the below code is useless as of now.

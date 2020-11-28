@@ -1,6 +1,6 @@
 # https://arturbosch.github.io/detekt/configurations.html
 build:
-  maxIssues: 1
+  maxIssues: 10
   weights:
   # complexity: 2
   # LongParameterList: 1
