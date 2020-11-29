@@ -24,7 +24,10 @@ checkstyle_format.report 'app/build/reports/detekt/detekt.xml'
 
 # APK Analyzer
 
-apkanalyzer.apk_file = "app/build/outputs/apk/debug/app-debug.apk"
-apkanalyzer.file_size
-apkanalyzer.permissions
-apkanalyzer.method_references
+apkstats.command_type=:apk_analyzer # required
+#apkstats.apkanalyzer_path='app/build/outputs/apk/debug/app-debug.apk'
+apkstats.apk_filepath='app/build/outputs/apk/debug/app-debug.apk' # required
+apkstats.file_size
+apkstats.permissions
+#apkstats.reference_count
+#apkstats.dex_count
