@@ -20,3 +20,11 @@ fail("fit left in tests") if `grep -r fit specs/ `.length > 1
 # ktlint
 checkstyle_format.base_path = Dir.pwd
 checkstyle_format.report 'app/build/reports/detekt/detekt.xml'
+
+
+# APK Analyzer
+
+apkanalyzer.apk_file = "app/build/outputs/apk/debug/app-debug.apk"
+apkanalyzer.file_size
+apkanalyzer.permissions
+apkanalyzer.method_references
