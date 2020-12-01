@@ -31,3 +31,8 @@ apkstats.file_size
 apkstats.permissions
 #apkstats.reference_count
 #apkstats.dex_count
+
+
+# APK Size
+apk_size = (File.size('app/build/outputs/apk/debug/app-debug.apk').to_f / 2**20).round(2)
+message "Debug APK Size: #{apk_size} MB"
